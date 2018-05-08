@@ -50,6 +50,7 @@
     "cli-prompt": "^0.6.0",
     "commander": "^2.8.1",
     "debug": "^3.1.0",
+    "interop-require": "^1.0.0",
     "mkdirp": "^0.5.1"
   },
   "devDependencies": {
