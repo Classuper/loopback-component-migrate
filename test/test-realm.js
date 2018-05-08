@@ -12,14 +12,14 @@ var sinon = require('sinon');
 chai.use(require('sinon-chai'));
 
 var path = require('path');
-var SIMPLE_APP = path.join(__dirname, 'fixtures', 'simple-app');
-var app = require(path.join(SIMPLE_APP, 'server/server.js'));
+var REALM_APP = path.join(__dirname, 'fixtures', 'realm-app');
+var app = require(path.join(REALM_APP, 'server/server.js'));
 
 global.Promise = require('bluebird');
 
 lt.beforeEach.withApp(app);
 
-describe('loopback db migrate (basic)', function() {
+describe('loopback db migrate (realm)', function() {
 
   describe('initialization', function() {
     it('should attach a Migration model to the app', function() {
@@ -36,9 +36,10 @@ describe('loopback db migrate (basic)', function() {
 
     // Set up a spy for each migration function.
     before(function() {
-      var m1 = require(path.join(SIMPLE_APP, 'server/migrations/0001-initialize.js'));
-      var m2 = require(path.join(SIMPLE_APP, 'server/migrations/0002-somechanges.js'));
-      var m3 = require(path.join(SIMPLE_APP, 'server/migrations/0003-morechanges.js'));
+      var m1 = require(path.join(REALM_APP, 'server/migrations/0001-initialize.js'));
+      var m2 = require(path.join(REALM_APP, 'server/migrations/0002-somechanges.js'));
+      var m3 = require(path.join(REALM_APP, 'server/migrations/0003-morechanges.js'));
+
       this.spies = {
         m1Up: sinon.spy(m1, 'up'),
         m1Down: sinon.spy(m1, 'down'),
@@ -78,10 +79,18 @@ describe('loopback db migrate (basic)', function() {
         app.models.Migration.destroyAll()
       ])
       .then(function() {
-        return app.models.Migration.create({
-          name: '0000-error.js',
-          runDtTm: new Date()
-        })
+        return Promise.all([
+          app.models.Migration.create({
+            name: '0000-error.js',
+            realm: 'quux',
+            runDtTm: new Date()
+          }),
+          app.models.Migration.create({
+            name: '0000-notexist.js',
+            realm: 'foo',
+            runDtTm: new Date()
+          })
+        ])
       })
     });
 
@@ -104,8 +113,8 @@ describe('loopback db migrate (basic)', function() {
             expect(err).to.not.be.undefined;
           })
       });
-
     });
+
     describe('migrate', function() {
       it('should set a property on app to indicate that migrations are running', function() {
         var self = this;
@@ -190,7 +199,7 @@ describe('loopback db migrate (basic)', function() {
           })
       });
 
-      it('should not rerun rollbacks that have already been run', function() {
+      it('should not rerun rollbacks that hae already been run', function() {
         var self = this;
         return app.models.Migration.migrate('up')
           .then(function() {

@@ -1,0 +1,7 @@
+{
+  "../../../../lib": {
+    "enableRest": false,
+    "migrationsDir": "./test/fixtures/realm-app/server/migrations",
+    "realm": "quux"
+  }
+}
