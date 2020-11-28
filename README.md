@@ -1,6 +1,6 @@
 A library to add simple database migration support to loopback projects.
 
-[![Dependencies](http://img.shields.io/david/fullcube/loopback-component-migrate.svg?style=flat)](https://david-dm.org/fullcube/loopback-component-migrate)
+[![Dependencies](http://img.shields.io/david/classuper/loopback-component-migrate.svg?style=flat)](https://david-dm.org/classuper/loopback-component-migrate)
 
 Migrations that have been run will be stored in a table called 'Migrations'.
 The library will read the loopback datasources.json files based on the NODE_ENV environment variable just like loopback does.
@@ -8,11 +8,9 @@ The usage is based on the node-db-migrate project.
 
 ## Installation
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/fullcube/loopback-component-migrate.svg)](https://greenkeeper.io/)
-
 1. Install in you loopback project:
 
-  `npm install --save loopback-component-migrate`
+  `npm install --save @classuper/loopback-component-migrate`
 
 2. Create a component-config.json file in your server folder (if you don't already have one)
 
