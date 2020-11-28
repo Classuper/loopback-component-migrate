@@ -80,21 +80,24 @@ program
     console.log('Migrating up to: %s', to || '');
     var server = program.server || process.cwd() + '/server/server.js';
     var app = requireInterop(path.resolve(process.cwd(), server));
-    var dataSource = app.models.Migration.getDataSource();
 
-    autoupdate(dataSource)
-      .then(function () {
-        return app.models.Migration.migrate('up', to);
-      })
-      .then(function (res) {
-        console.log('Done.');
-      })
-      .catch(function (err) {
-        console.log(err);
-      })
-      .finally(function () {
-        process.exit();
-    });
+    app.on('booted', function () {
+      var dataSource = app.models.Migration.getDataSource();
+
+      autoupdate(dataSource)
+        .then(function () {
+          return app.models.Migration.migrate('up', to);
+        })
+        .then(function (res) {
+          console.log('Done.');
+        })
+        .catch(function (err) {
+          console.log(err);
+        })
+        .finally(function () {
+          process.exit();
+        });
+    })
   }).on('--help', function() {
     console.log('  Examples:');
     console.log();
@@ -111,21 +114,24 @@ program
     console.log('Rolling back to: %s', to || '');
     var server = program.server || process.cwd() + '/server/server.js';
     var app = require(path.resolve(process.cwd(), server));
-    var dataSource = app.models.Migration.getDataSource();
 
-    autoupdate(dataSource)
-      .then(function () {
-        return app.models.Migration.migrate('down', to);
-      })
-      .then(function (res) {
-        console.log('Done.');
-      })
-      .catch(function (err) {
-        console.log(err);
-      })
-      .finally(function () {
-        process.exit();
-      });
+    app.on('booted', function () {
+      var dataSource = app.models.Migration.getDataSource();
+
+      autoupdate(dataSource)
+        .then(function () {
+          return app.models.Migration.migrate('down', to);
+        })
+        .then(function (res) {
+          console.log('Done.');
+        })
+        .catch(function (err) {
+          console.log(err);
+        })
+        .finally(function () {
+          process.exit();
+        });
+    });
   }).on('--help', function() {
     console.log('  Examples:');
     console.log();

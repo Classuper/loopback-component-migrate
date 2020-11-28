@@ -1,42 +1,41 @@
 {
-  "name": "loopback-component-migrate",
+  "name": "@classuper/loopback-component-migrate",
   "version": "0.0.0-semantically-released.0",
   "description": "Migration framework for Loopback.",
-  "author": {
-    "name": "Tom Kirkpatrick @mrfelton"
-  },
-  "contributors": [
-    "Scott Lively @slively",
-    "Ivan Tugay @listepo"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/fullcube/loopback-component-migrate.git"
-  },
+  "main": "./lib/index.js",
   "keywords": [
     "loopback",
     "strongloop",
     "migrate"
   ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/fullcube/loopback-component-migrate/issues"
+  "author": "Alexey Kucherenko @killmenot",
+  "contributors": [
+    "Tom Kirkpatrick @mrfelton",
+    "Scott Lively @slively",
+    "Ivan Tugay @listepo"
+  ],
+  "bin": {
+    "loopback-component-migrate": "./bin/cli",
+    "loopback-component-migrate-babel": "./bin/babel-cli"
   },
-  "homepage": "https://github.com/fullcube/loopback-component-migrate",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
   "files": [
     "migration-skeleton.js",
     "lib",
     "bin",
     "test"
   ],
-  "directories": {
-    "lib": "lib",
-    "test": "test"
+  "homepage": "https://github.com/classuper/loopback-component-migrate",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/classuper/loopback-component-migrate.git"
   },
-  "main": "./lib/index.js",
-  "bin": {
-    "loopback-component-migrate": "./bin/cli",
-    "loopback-component-migrate-babel": "./bin/babel-cli"
+  "bugs": {
+    "url": "https://github.com/classuper/loopback-component-migrate/issues"
   },
   "scripts": {
     "lint": "jscs lib && jshint lib",
@@ -49,29 +48,30 @@
   },
   "dependencies": {
     "cli-prompt": "^0.6.0",
-    "commander": "^2.8.1",
-    "debug": "^3.1.0",
+    "commander": "^6.2.0",
+    "debug": "^4.3.1",
     "interop-require": "^1.0.0",
     "mkdirp": "^0.5.1"
   },
   "devDependencies": {
-    "bluebird": "^3.5.0",
-    "chai": "^4.1.2",
-    "commitlint": "^6.2.0",
-    "condition-circle": "^2.0.1",
-    "ghooks": "^2.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "bluebird": "^3.7.2",
+    "chai": "^4.2.0",
+    "commitlint": "^11.0.0",
+    "condition-circle": "^2.0.2",
+    "ghooks": "^2.0.4",
     "jscs": "^3.0.7",
-    "jshint": "^2.9.5",
-    "lodash": "^4.17.10",
-    "loopback": "^3.8.0",
-    "loopback-boot": "^2.24.1",
-    "loopback-component-explorer": "^6.0.0",
+    "jshint": "^2.12.0",
+    "lodash": "^4.17.20",
+    "loopback": "^3.28.0",
+    "loopback-boot": "^3.3.1",
+    "loopback-component-explorer": "^6.5.1",
     "loopback-testing": "^1.4.0",
-    "mocha": "^5.1.1",
-    "nyc": "^11.7.1",
-    "semantic-release": "^15.3.1",
-    "sinon": "^5.0.7",
-    "sinon-chai": "^3.0.0",
+    "mocha": "^8.2.1",
+    "nyc": "^15.1.0",
+    "semantic-release": "^17.3.0",
+    "sinon": "^9.2.1",
+    "sinon-chai": "^3.5.0",
     "validate-commit-msg": "^2.14.0"
   },
   "config": {
